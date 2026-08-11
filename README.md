@@ -25,7 +25,9 @@ rather than an error when a data source is missing.
 | **[legbar](https://github.com/gmhoward9289-ops/legbar)** | *Both, on one canvas.* Live agent sessions beside GitHub CI from a single discovery layer, so the two panes can never disagree. Sees **Cursor agents** too, which write no session marker at all. | `pipx install legbar` |
 | **[git-roost](https://github.com/gmhoward9289-ops/git-roost)** | *What is actually in the trees?* Every repo and worktree on the box in one table, most actionable first. Sessions report intent; git reports what happened. | clone and run — one file, no deps |
 
-Python 3.9+, standard library only, macOS/Linux/Windows.
+Python 3.9+, macOS/Linux/Windows. Standard library only on macOS and Linux;
+Windows pulls in `windows-curses`, because `curses` is the one thing not
+already in the stdlib there.
 
 ## Making numbers defensible
 
