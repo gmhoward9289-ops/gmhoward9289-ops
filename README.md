@@ -63,7 +63,6 @@ Questions in the open go in Discussions:
 ## Elsewhere
 
 - **[awesome-tuis](https://github.com/gmhoward9289-ops/awesome-tuis)** — a curated list of terminal user interface projects.
-- **[vanity-scout](https://github.com/gmhoward9289-ops/vanity-scout)** *(archived)* — FCC vanity callsign availability tracking, for the amateur radio operators who care about four specific letters.
 
 ---
 
