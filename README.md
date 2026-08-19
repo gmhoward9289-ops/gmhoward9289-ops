@@ -35,6 +35,19 @@ Questions in the open go in Discussions:
 **[leghorn](https://github.com/gmhoward9289-ops/leghorn/discussions)** ·
 **[legbar](https://github.com/gmhoward9289-ops/legbar/discussions)**.
 
+<p>
+  <img src="https://raw.githubusercontent.com/gmhoward9289-ops/roost/main/demo/roost-demo.gif" alt="roost: live Claude Code sessions, buckets, subagents, and the advice panel in a terminal UI" width="720"><br>
+  <sub><b>roost</b> — buckets, subagents, the advice panel, and a cancelled stop.</sub>
+</p>
+<p>
+  <img src="https://raw.githubusercontent.com/gmhoward9289-ops/leghorn/main/demo/leghorn-demo.gif" alt="leghorn: Claude Code sessions joined to git state and GitHub CI" width="720"><br>
+  <sub><b>leghorn</b> — contested sessions, red CI, a session detail overlay, and the git toggle.</sub>
+</p>
+<p>
+  <img src="https://raw.githubusercontent.com/gmhoward9289-ops/legbar/main/demo/legbar-demo.gif" alt="legbar: agent sessions and GitHub CI on one canvas" width="720"><br>
+  <sub><b>legbar</b> — two contested trees, sessions waiting on a human, and red CI that cannot scroll away.</sub>
+</p>
+
 ## Making numbers defensible
 
 - **[counting-chicken-wings](https://github.com/gmhoward9289-ops/counting-chicken-wings)** — how many chickens does it take to make a dozen wings? Six is a floor, not a fact; the real answer is usually close to twelve. A pooling model with an honest uncertainty band, where every input cites a primary source.
