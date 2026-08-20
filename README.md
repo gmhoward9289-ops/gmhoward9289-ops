@@ -1,8 +1,9 @@
 # George M. Howard
 
 I build small, sharp tools in the open — mostly terminal programs for watching
-AI coding agents work, plus a few projects that exist to make a number
-defensible instead of merely plausible.
+AI coding agents work, pytest plugins that turn those sessions into CI
+assertions, plus a few projects that exist to make a number defensible
+instead of merely plausible.
 
 Everything here is single-purpose and installable without a build step, mostly
 Apache 2.0 (a couple are still MIT — check each repo). Write-ups live at
@@ -40,6 +41,23 @@ Questions in the open go in Discussions:
   <img src="https://raw.githubusercontent.com/gmhoward9289-ops/roost/main/demo/roost-demo.gif" alt="roost: live Claude Code sessions, buckets, subagents, and the advice panel in a terminal UI" width="720"><br>
   <sub><b>roost</b> — buckets, subagents, the advice panel, and a cancelled stop.</sub>
 </p>
+
+## Session evidence — typed transcripts and CI assertions
+
+The flock watches live. These three keep a typed record and assert against it
+in CI — no LLM in the pipeline, no network calls from the test.
+
+- **[henhouse](https://github.com/gmhoward9289-ops/henhouse)** — Claude Code and Cursor JSONL transcripts parsed into typed session summaries and tool-call events. Stdlib only. The flock products link this schema; they do not take a pip dependency on it.
+- **[pytest-session-trace](https://github.com/gmhoward9289-ops/pytest-session-trace)** — a recorded agent session becomes deterministic tool-call assertions. Point the fixture at a JSONL or henhouse envelope; CI fails when the calls do not match.
+- **[pytest-mcp-contract](https://github.com/gmhoward9289-ops/pytest-mcp-contract)** — domain MCP tool contracts: registered names, annotations, input schemas, and in-memory handler calls. Not protocol conformance, not security payloads.
+
+Together: contract says the server exposes the right tools; session-trace says a saved run actually called them. Starter stack:
+[`pytest-mcp-contract/examples/proof_stack/`](https://github.com/gmhoward9289-ops/pytest-mcp-contract/tree/main/examples/proof_stack).
+
+Discussions:
+**[henhouse](https://github.com/gmhoward9289-ops/henhouse/discussions)** ·
+**[pytest-session-trace](https://github.com/gmhoward9289-ops/pytest-session-trace/discussions)** ·
+**[pytest-mcp-contract](https://github.com/gmhoward9289-ops/pytest-mcp-contract/discussions)**.
 
 ## Making numbers defensible
 
