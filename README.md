@@ -33,23 +33,12 @@ already in the stdlib there.
 Questions in the open go in Discussions:
 **[roost](https://github.com/gmhoward9289-ops/roost/discussions)** ·
 **[leghorn](https://github.com/gmhoward9289-ops/leghorn/discussions)** ·
-**[legbar](https://github.com/gmhoward9289-ops/legbar/discussions)**.
+**[legbar](https://github.com/gmhoward9289-ops/legbar/discussions)** ·
+**[git-roost](https://github.com/gmhoward9289-ops/git-roost/discussions)**.
 
 <p>
   <img src="https://raw.githubusercontent.com/gmhoward9289-ops/roost/main/demo/roost-demo.gif" alt="roost: live Claude Code sessions, buckets, subagents, and the advice panel in a terminal UI" width="720"><br>
   <sub><b>roost</b> — buckets, subagents, the advice panel, and a cancelled stop.</sub>
-</p>
-<p>
-  <img src="https://raw.githubusercontent.com/gmhoward9289-ops/leghorn/main/demo/leghorn-demo.gif" alt="leghorn: Claude Code sessions joined to git state and GitHub CI" width="720"><br>
-  <sub><b>leghorn</b> — contested sessions, red CI, a session detail overlay, and the git toggle.</sub>
-</p>
-<p>
-  <img src="https://raw.githubusercontent.com/gmhoward9289-ops/legbar/main/demo/legbar-demo.gif" alt="legbar: agent sessions and GitHub CI on one canvas" width="720"><br>
-  <sub><b>legbar</b> — two contested trees, sessions waiting on a human, and red CI that cannot scroll away.</sub>
-</p>
-<p>
-  <img src="https://raw.githubusercontent.com/gmhoward9289-ops/git-roost/main/demo/git-roost-demo.gif" alt="git-roost: a table of git repos and worktrees re-sorting as a fleet drifts, goes uncommitted, and gets pushed" width="720"><br>
-  <sub><b>git-roost</b> — the table re-sorting as a synthetic fleet drifts, goes uncommitted, and gets pushed.</sub>
 </p>
 
 ## Making numbers defensible
@@ -58,7 +47,7 @@ Questions in the open go in Discussions:
 - **[xycalc](https://github.com/gmhoward9289-ops/xycalc)** — how much X does it take to run Y? Infrastructure sizing from a corpus where every number cites a source *and* names the versions it applies to.
 - **[apcam-ai-power-meter](https://github.com/gmhoward9289-ops/apcam-ai-power-meter)** — APCAM. What local LLM inference actually costs in electricity, from measured GPU wattage rather than a spec sheet.
 - **[trust-but-anchor](https://github.com/gmhoward9289-ops/trust-but-anchor)** — models misquote sources 27–36% of the time even when told to be verbatim. Letting code locate a model-proposed anchor instead of trusting its quote recovers near-total coverage, with every span a real substring by construction.
-- **[foundation-cosmetics-calculator](https://github.com/gmhoward9289-ops/foundation-cosmetics-calculator)** — sourced research on the cosmetics industry, at **[foundation.swamplink.com](https://foundation.swamplink.com)**.
+- **[counting-makeup-foundation](https://github.com/gmhoward9289-ops/counting-makeup-foundation)** — sourced research on the cosmetics industry, at **[foundation.swamplink.com](https://foundation.swamplink.com)**.
 
 ## Security
 
