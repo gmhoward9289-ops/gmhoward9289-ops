@@ -1,12 +1,3 @@
-<a href="https://github.com/gmhoward9289-ops">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/contrib-dark.svg">
-    <img src="assets/contrib-light.svg"
-         alt="GitHub contributions over the last 30 days"
-         width="348" align="right">
-  </picture>
-</a>
-
 # George M. Howard
 
 I build small, sharp tools in the open — mostly terminal programs for watching
@@ -25,6 +16,17 @@ If you try something here, I would like to know where it broke, what you
 expected it to do instead, or why you closed it after thirty seconds.
 Every repo has Discussions open, and
 **[dev@swamplink.com](mailto:dev@swamplink.com)** reaches me directly.
+
+<p align="center">
+  <a href="https://github.com/gmhoward9289-ops">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/contrib-dark.svg">
+      <img src="assets/contrib-light.svg"
+           alt="GitHub contributions over the last 30 days"
+           width="348">
+    </picture>
+  </a>
+</p>
 
 ---
 
