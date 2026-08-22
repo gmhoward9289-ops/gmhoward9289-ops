@@ -1,10 +1,3 @@
-<p align="center">
-  <a href="https://github.com/gmhoward9289-ops"><img
-    src="https://ghchart.rshah.org/gmhoward9289-ops"
-    alt="GitHub contribution graph for gmhoward9289-ops over the last year"
-    width="100%"></a>
-</p>
-
 # George M. Howard
 
 I build small, sharp tools in the open — mostly terminal programs for watching
