@@ -18,12 +18,13 @@ Everything here is single-purpose and installable without a build step, mostly
 Apache 2.0 (a couple are still MIT — check each repo). Write-ups live at
 **[blog.swamplink.com](https://blog.swamplink.com)**.
 
-I write code most days and I am looking for people to actually use these
-tools and tell me where they break. Every project below installs in one
-command and has Discussions open. Bug reports, "this did not work on my
-machine", and "why would anyone want this" are all useful to me — as is a
-note that something worked. **[dev@swamplink.com](mailto:dev@swamplink.com)**
-reaches me directly.
+I write code most days, and I build these on my own — so the failure mode
+is not running out of ideas, it is never having one argued with.
+
+If you try something here, I would like to know where it broke, what you
+expected it to do instead, or why you closed it after thirty seconds.
+Every repo has Discussions open, and
+**[dev@swamplink.com](mailto:dev@swamplink.com)** reaches me directly.
 
 ---
 
