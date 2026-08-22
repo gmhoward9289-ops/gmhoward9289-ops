@@ -10,9 +10,9 @@ import argparse, datetime as dt, json, subprocess, sys, os
 LIGHT = dict(scale=['#ebedf0','#9be9a8','#40c463','#30a14e','#216e39'],
              bg='#ffffff', border='#d0d7de', text='#59636e', strong='#1f2328',
              empty_stroke='rgba(27,31,35,0.06)')
-DARK  = dict(scale=['#151b23','#033a16','#196c2e','#2ea043','#56d364'],
+DARK  = dict(scale=['#21262d','#033a16','#196c2e','#2ea043','#56d364'],
              bg='#0d1117', border='#3d444d', text='#9198a1', strong='#f0f6fc',
-             empty_stroke='rgba(255,255,255,0.05)')
+             empty_stroke='rgba(255,255,255,0.09)')
 
 CELL, GAP, RX = 40, 6, 8
 PAD, HDR, CAP = 16, 22, 50
@@ -24,9 +24,8 @@ def fetch(login):
          '{weeks{contributionDays{date contributionCount}}}}}}' % login)
     out = subprocess.run(['gh', 'api', 'graphql', '-f', 'query=' + q],
                          capture_output=True, text=True, check=True).stdout
-    weeks = json.loads(out)['data']['user']['contributionsCollection'][
+    return json.loads(out)['data']['user']['contributionsCollection'][
         'contributionCalendar']['weeks']
-    return [d for w in weeks for d in w['contributionDays']]
 
 
 def levels(counts):
@@ -55,9 +54,8 @@ def esc(s):
 def render(days, theme, title):
     counts = [d['contributionCount'] for d in days]
     thr = levels(counts)
-    first = dt.date.fromisoformat(days[0]['date'])
-    lead = (first.weekday() + 1) % 7            # Python Mon=0 -> calendar Sun=0
-    rows = -(-(lead + len(days)) // 7)
+    rows = -(-len(days) // 7)
+    trailing = rows * 7 - len(days)             # days left in the current week
     pitch = CELL + GAP
     gw = 7 * pitch - GAP
     W = gw + 2 * PAD
@@ -76,7 +74,7 @@ def render(days, theme, title):
                  f'font-size="11" font-weight="600" fill="{t["text"]}">{name[0]}</text>')
 
     for idx, d in enumerate(days):
-        pos = lead + idx
+        pos = idx
         x = PAD + (pos % 7) * pitch
         y = PAD + HDR + (pos // 7) * pitch
         n = d['contributionCount']
@@ -85,6 +83,13 @@ def render(days, theme, title):
         o.append(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="{RX}" '
                  f'fill="{t["scale"][lv]}"{stroke}><title>{d["date"]}: {n} '
                  f'contribution{"" if n == 1 else "s"}</title></rect>')
+
+    for i in range(trailing):
+        pos = len(days) + i
+        x = PAD + (pos % 7) * pitch
+        y = PAD + HDR + (pos // 7) * pitch
+        o.append(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="{RX}" '
+                 f'fill="none" stroke="{t["empty_stroke"]}" stroke-dasharray="4 4"/>')
 
     cy = PAD + HDR + rows * pitch - GAP + 20
     total, active = sum(counts), sum(1 for c in counts if c > 0)
@@ -107,11 +112,12 @@ def render(days, theme, title):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--login', default='gmhoward9289-ops')
-    ap.add_argument('--days', type=int, default=30)
+    ap.add_argument('--weeks', type=int, default=5)
     ap.add_argument('--out-dir', default='.')
     a = ap.parse_args()
 
-    days = fetch(a.login)[-a.days:]
+    weeks = fetch(a.login)[-a.weeks:]
+    days = [d for w in weeks for d in w['contributionDays']]
     total = sum(d['contributionCount'] for d in days)
     if not days or total == 0:
         sys.exit('refusing to render an empty graph: the token cannot read '
