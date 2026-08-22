@@ -1,3 +1,12 @@
+<a href="https://github.com/gmhoward9289-ops">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/contrib-dark.svg">
+    <img src="assets/contrib-light.svg"
+         alt="GitHub contributions over the last 30 days"
+         width="348" align="right">
+  </picture>
+</a>
+
 # George M. Howard
 
 I build small, sharp tools in the open — mostly terminal programs for watching
@@ -8,6 +17,13 @@ instead of merely plausible.
 Everything here is single-purpose and installable without a build step, mostly
 Apache 2.0 (a couple are still MIT — check each repo). Write-ups live at
 **[blog.swamplink.com](https://blog.swamplink.com)**.
+
+I write code most days and I am looking for people to actually use these
+tools and tell me where they break. Every project below installs in one
+command and has Discussions open. Bug reports, "this did not work on my
+machine", and "why would anyone want this" are all useful to me — as is a
+note that something worked. **[dev@swamplink.com](mailto:dev@swamplink.com)**
+reaches me directly.
 
 ---
 
