@@ -113,6 +113,9 @@ def main():
 
     days = fetch(a.login)[-a.days:]
     total = sum(d['contributionCount'] for d in days)
+    if not days or total == 0:
+        sys.exit('refusing to render an empty graph: the token cannot read '
+                 f'{a.login} contributions, or there really were none')
     active = sum(1 for d in days if d['contributionCount'] > 0)
     title = (f'{total:,} GitHub contributions in the last {len(days)} days, '
              f'active on {active} of them')
