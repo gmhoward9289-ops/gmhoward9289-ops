@@ -39,10 +39,10 @@ rather than an error when a data source is missing.
 
 | | what it answers | install |
 |---|---|---|
-| **[roost](https://github.com/gmhoward9289-ops/roost)** | *What are the models doing?* Every live Claude Code session, its model, its context burn — and **the subagents it spawned**, which nothing that watches pids can see. | `brew install gmhoward9289-ops/tap/roost` · `pipx install roost-top` · `npm i -g roost-top` · apt |
+| **[roost](https://github.com/gmhoward9289-ops/roost)** | *What are the models doing?* Every live Claude Code session, its model, its context burn — and **the subagents it spawned**, which nothing that watches pids can see. | `brew install gmhoward9289-ops/tap/roost` · `pipx install roost-top` · `npm i -g roost-top` · `winget install gmhoward9289-ops.roost` · apt |
 | **[leghorn](https://github.com/gmhoward9289-ops/leghorn)** | *What did this agent actually do?* A session reports intent; git reports what landed. Sessions joined to real git state, GitHub CI and open PRs with failures pinned until green, and a commit feed across every repo. | `brew install gmhoward9289-ops/tap/leghorn` · `pipx install leghorn` · `npm i -g leghorn` · apt |
-| **[legbar](https://github.com/gmhoward9289-ops/legbar)** | *Both, on one canvas.* Live agent sessions beside GitHub CI from a single discovery layer, so the two panes can never disagree. Sees **Cursor agents** too, which write no session marker at all. | `pipx install legbar` |
-| **[git-roost](https://github.com/gmhoward9289-ops/git-roost)** | *What is actually in the trees?* Every repo and worktree on the box in one table, most actionable first. Sessions report intent; git reports what happened. | `brew install gmhoward9289-ops/tap/git-roost` · `pipx install git-roost` · `npm i -g git-roost` · `winget install gmhoward9289-ops.git-roost` |
+| **[legbar](https://github.com/gmhoward9289-ops/legbar)** | *Both, on one canvas.* Live agent sessions beside GitHub CI from a single discovery layer, so the two panes can never disagree. Sees **Cursor agents** too, which write no session marker at all. | `brew install gmhoward9289-ops/tap/legbar` · `pipx install legbar` · `npm i -g legbar` · apt |
+| **[git-roost](https://github.com/gmhoward9289-ops/git-roost)** | *What is actually in the trees?* Every repo and worktree on the box in one table, most actionable first. Sessions report intent; git reports what happened. | `brew install gmhoward9289-ops/tap/git-roost` · `pipx install git-roost` · `npm i -g git-roost` |
 
 Python 3.9+, macOS/Linux/Windows. Standard library only on macOS and Linux;
 Windows pulls in `windows-curses`, because `curses` is the one thing not
