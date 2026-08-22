@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Render the last N days of GitHub contributions as a calendar-grid SVG.
+"""Render the last N days of GitHub contributions as a wide single-row SVG.
 
-Two files, light and dark, so the README can swap them with <picture> and
-prefers-color-scheme -- camo serves one fixed file per URL, so a single
-theme-aware SVG is not possible.
+One small box per day in a horizontal strip, week tick labels underneath,
+totals and the Less..More legend on one caption line. Two files, light and
+dark, so the README can swap them with <picture> and prefers-color-scheme --
+camo serves one fixed file per URL, so a single theme-aware SVG is not
+possible.
 """
 import argparse, datetime as dt, json, subprocess, sys, os
 
@@ -14,9 +16,10 @@ DARK  = dict(scale=['#21262d','#033a16','#196c2e','#2ea043','#56d364'],
              bg='#0d1117', border='#3d444d', text='#9198a1', strong='#f0f6fc',
              empty_stroke='rgba(255,255,255,0.09)')
 
-CELL, GAP, RX = 40, 6, 8
-PAD, HDR, CAP = 16, 22, 50
-DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+CELL, GAP, RX = 16, 4, 4
+PAD = 16
+MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 
 def fetch(login):
@@ -54,12 +57,13 @@ def esc(s):
 def render(days, theme, title):
     counts = [d['contributionCount'] for d in days]
     thr = levels(counts)
-    rows = -(-len(days) // 7)
-    trailing = rows * 7 - len(days)             # days left in the current week
     pitch = CELL + GAP
-    gw = 7 * pitch - GAP
+    gw = len(days) * pitch - GAP
     W = gw + 2 * PAD
-    H = PAD + HDR + rows * pitch - GAP + CAP + PAD
+    cell_y = PAD
+    tick_y = cell_y + CELL + 14                 # week tick labels
+    cap_y = tick_y + 22                         # totals + legend line
+    H = cap_y + 6 + PAD - 6
     t = theme
     o = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
          f'viewBox="0 0 {W} {H}" role="img" aria-label="{esc(title)}">',
@@ -68,42 +72,33 @@ def render(days, theme, title):
          f'<rect width="{W}" height="{H}" rx="12" fill="{t["bg"]}" '
          f'stroke="{t["border"]}"/>']
 
-    for i, name in enumerate(DOW):
-        x = PAD + i * pitch + CELL / 2
-        o.append(f'<text x="{x:.0f}" y="{PAD + 13}" text-anchor="middle" '
-                 f'font-size="11" font-weight="600" fill="{t["text"]}">{name[0]}</text>')
-
     for idx, d in enumerate(days):
-        pos = idx
-        x = PAD + (pos % 7) * pitch
-        y = PAD + HDR + (pos // 7) * pitch
+        x = PAD + idx * pitch
         n = d['contributionCount']
         lv = level_of(n, thr)
         stroke = (f' stroke="{t["empty_stroke"]}"' if lv == 0 else '')
-        o.append(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="{RX}" '
-                 f'fill="{t["scale"][lv]}"{stroke}><title>{d["date"]}: {n} '
-                 f'contribution{"" if n == 1 else "s"}</title></rect>')
+        o.append(f'<rect x="{x}" y="{cell_y}" width="{CELL}" height="{CELL}" '
+                 f'rx="{RX}" fill="{t["scale"][lv]}"{stroke}><title>{d["date"]}: '
+                 f'{n} contribution{"" if n == 1 else "s"}</title></rect>')
 
-    for i in range(trailing):
-        pos = len(days) + i
-        x = PAD + (pos % 7) * pitch
-        y = PAD + HDR + (pos // 7) * pitch
-        o.append(f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="{RX}" '
-                 f'fill="none" stroke="{t["empty_stroke"]}" stroke-dasharray="4 4"/>')
+    for idx in range(0, len(days), 7):          # one tick per week
+        date = dt.date.fromisoformat(days[idx]['date'])
+        x = PAD + idx * pitch
+        o.append(f'<text x="{x}" y="{tick_y}" font-size="10" '
+                 f'fill="{t["text"]}">{MONTHS[date.month - 1]} {date.day}</text>')
 
-    cy = PAD + HDR + rows * pitch - GAP + 20
     total, active = sum(counts), sum(1 for c in counts if c > 0)
-    o.append(f'<text x="{PAD}" y="{cy}" font-size="13" font-weight="600" '
-             f'fill="{t["strong"]}">{total:,} contributions in {len(days)} days</text>')
-    o.append(f'<text x="{PAD}" y="{cy + 19}" font-size="11" '
-             f'fill="{t["text"]}">active {active} of {len(days)} days</text>')
-    lx = PAD + gw - 5 * 15 - 30
-    o.append(f'<text x="{lx - 6}" y="{cy + 19}" text-anchor="end" font-size="11" '
+    o.append(f'<text x="{PAD}" y="{cap_y}" font-size="12" font-weight="600" '
+             f'fill="{t["strong"]}">{total:,} contributions in the last '
+             f'{len(days)} days<tspan font-weight="400" fill="{t["text"]}">'
+             f'&#160;&#183; active {active} of {len(days)}</tspan></text>')
+    lx = PAD + gw - 5 * 14 - 11
+    o.append(f'<text x="{lx - 6}" y="{cap_y}" text-anchor="end" font-size="11" '
              f'fill="{t["text"]}">Less</text>')
     for i in range(5):
-        o.append(f'<rect x="{lx + i * 15}" y="{cy + 10}" width="11" height="11" '
-                 f'rx="3" fill="{t["scale"][i]}"/>')
-    o.append(f'<text x="{lx + 5 * 15 + 4}" y="{cy + 19}" font-size="11" '
+        o.append(f'<rect x="{lx + i * 14}" y="{cap_y - 9}" width="10" '
+                 f'height="10" rx="3" fill="{t["scale"][i]}"/>')
+    o.append(f'<text x="{lx + 5 * 14 + 3}" y="{cap_y}" font-size="11" '
              f'fill="{t["text"]}">More</text>')
     o.append('</svg>')
     return '\n'.join(o), total
