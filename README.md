@@ -1,13 +1,3 @@
-<p align="center">
-  <a href="https://github.com/gmhoward9289-ops">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="assets/contrib-dark.svg">
-      <img src="assets/contrib-light.svg"
-           alt="GitHub contributions over the last 35 days">
-    </picture>
-  </a>
-</p>
-
 # George M. Howard
 
 I build small, sharp tools in the open — mostly terminal programs for watching
